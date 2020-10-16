@@ -9,15 +9,15 @@ const routes: Routes = [
     component: AdminPage
   },
   {
-    path: 'add-product',
+    path: 'add',
     loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
   },
   {
-    path: 'edit-product',
+    path: 'edit/:productId',
     loadChildren: () => import('./edit-product/edit-product.module').then( m => m.EditProductPageModule)
   },
   {
-    path: 'detail-product',
+    path: 'detail/:productId',
     loadChildren: () => import('./detail-product/detail-product.module').then( m => m.DetailProductPageModule)
   }
 ];

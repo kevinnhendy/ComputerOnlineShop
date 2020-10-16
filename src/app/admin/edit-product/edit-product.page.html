@@ -1,9 +1,83 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-product</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #form="ngForm" (ngSubmit)="presentAlert(form)">
+    <ion-list>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">URL Foto, comma-separated</ion-label>
+        <ion-input type="url" ngModel name="foto" required [ngModel]="product.foto"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Merek</ion-label>
+        <ion-input type="text" ngModel name="merek" required [ngModel]="product.merek"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Model</ion-label>
+        <ion-input type="text" ngModel name="model" required [ngModel]="product.model"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Harga</ion-label>
+        <ion-input type="number" ngModel name="harga" required [ngModel]="product.harga"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Stok</ion-label>
+        <ion-input type="number" ngModel name="stok" required [ngModel]="product.stok"></ion-input>
+      </ion-item>
 
+      <!-- Detail CPU -->
+      <ng-container *ngIf="product.id.startsWith('c')">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Base Clock</ion-label>
+          <ion-input type="number" ngModel name="baseClock" required [ngModel]="product.baseClock"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Boost Clock</ion-label>
+          <ion-input type="number" ngModel name="boostClock" required [ngModel]="product.boostClock"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Jumlah Core</ion-label>
+          <ion-input type="number" ngModel name="jumlahCore" required [ngModel]="product.jumlahCore"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Jumlah Thread</ion-label>
+          <ion-input type="number" ngModel name="jumlahThread" required [ngModel]="product.jumlahThread"></ion-input>
+        </ion-item>
+      </ng-container>
+
+
+      <!-- Detail Motherboard -->
+      <ng-container *ngIf="product.id.startsWith('m')">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Chipset</ion-label>
+          <ion-input type="text" ngModel name="chipset" required [ngModel]="product.chipset"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Processor</ion-label>
+          <ion-input type="text" ngModel name="merekProcessor" required [ngModel]="product.merekProcessor"></ion-input>
+        </ion-item>
+      </ng-container>
+
+      <!-- Detail RAM -->
+      <ng-container *ngIf="product.id.startsWith('r')">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Speed</ion-label>
+          <ion-input type="number" ngModel name="speed" required [ngModel]="product.speed"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Ukuran</ion-label>
+          <ion-input type="number" ngModel name="ukuran" required [ngModel]="product.ukuran"></ion-input>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+    <ion-button class="ion-margin" type="submit" color="primary" expand="block" [disabled]="!form.valid">
+      Edit Item
+    </ion-button>
+  </form>
 </ion-content>

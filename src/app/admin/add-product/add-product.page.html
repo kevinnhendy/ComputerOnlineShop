@@ -1,9 +1,89 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-product</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Add New Product</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #form="ngForm" (ngSubmit)="presentAlert(form)">
+    <ion-list>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">URL Foto, comma-separated</ion-label>
+        <ion-input type="url" ngModel name="foto" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label>Jenis Barang</ion-label>
+        <ion-select ngModel name="jenis" #jenis="ngModel" required>
+          <ion-select-option value="CPU">CPU</ion-select-option>
+          <ion-select-option value="GPU">GPU</ion-select-option>
+          <ion-select-option value="Motherboard">Motherboard</ion-select-option>
+          <ion-select-option value="RAM">RAM</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Merek</ion-label>
+        <ion-input type="text" ngModel name="merek" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Model</ion-label>
+        <ion-input type="text" ngModel name="model" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Harga</ion-label>
+        <ion-input type="number" ngModel name="harga" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin">
+        <ion-label position="floating">Stok</ion-label>
+        <ion-input type="number" ngModel name="stok" required></ion-input>
+      </ion-item>
 
+<!--      CPU-->
+      <ng-container *ngIf="jenis.value === 'CPU'">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Base Clock</ion-label>
+          <ion-input type="number" ngModel name="baseClock" required></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Boost Clock</ion-label>
+          <ion-input type="number" ngModel name="boostClock" required></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Jumlah Core</ion-label>
+          <ion-input type="number" ngModel name="jumlahCore" required></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Jumlah Thread</ion-label>
+          <ion-input type="number" ngModel name="jumlahThread" required></ion-input>
+        </ion-item>
+      </ng-container>
+
+<!--      Motherboard-->
+      <ng-container *ngIf="jenis.value === 'Motherboard'">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Chipset</ion-label>
+          <ion-input type="text" ngModel name="chipset" required></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Processor</ion-label>
+          <ion-input type="text" ngModel name="merekProcessor" required></ion-input>
+        </ion-item>
+      </ng-container>
+
+<!--      RAM-->
+      <ng-container *ngIf="jenis.value === 'RAM'">
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Speed</ion-label>
+          <ion-input type="number" ngModel name="speed" required></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin">
+          <ion-label position="floating">Ukuran</ion-label>
+          <ion-input type="number" ngModel name="ukuran" required></ion-input>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+    <ion-button class="ion-margin" type="submit" color="primary" expand="block" [disabled]="!form.valid" >
+      Add Item
+    </ion-button>
+  </form>
 </ion-content>

@@ -1,20 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="productMenu"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button (click)="changeProductView()">
+        <ion-icon *ngIf="productView == false" name="list-outline" slot="icon-only"></ion-icon>
+        <ion-icon *ngIf="productView == true" name="grid-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <ion-grid>
+    <ion-row  *ngIf="productView == false">
+      <ion-col size="12" size-sm="8" offset-sm="2">
+          <ion-list>
+            <ng-container *ngFor="let product of products">
+              <ng-container *ngIf="product.stok > 0">
+                <ion-item button lines="none" class="ion-margin" [routerLink]="['./detail/', product.id]">
+                  <ion-thumbnail slot="start">
+                    <ion-img [src]="product.foto[0]"></ion-img>
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h3>{{ product.merek + ' ' + product.model }}</h3>
+                    <p>{{ product.harga | currency:'IDR':'symbol-narrow':'3.0'}}</p>
+                    <p>Tersedia: {{ product.stok }}</p>
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ng-container>
+          </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="productView == true">
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-grid>
+          <ion-row>
+            <ng-container *ngFor="let product of products">
+              <ng-container *ngIf="product.stok > 0">
+                <ion-col size="6" size-sm="4" [routerLink]="['./detail/', product.id]">
+                  <ion-card>
+                    <ion-img [src]="product.foto[0]"></ion-img>
+                    <ion-card-header>
+                      <ion-text >{{ product.merek + ' ' + product.model }}</ion-text>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <ion-label>
+                        <p>{{ product.harga | currency:'IDR':'symbol-narrow':'3.0'}}</p>
+                        <p>Tersedia: {{ product.stok }}</p>
+                      </ion-label>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ng-container>
+            </ng-container>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
